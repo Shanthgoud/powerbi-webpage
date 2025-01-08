@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Power BI Dashboard</title>
+  <script type="module" src="app.js"></script>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="login-container" class="hidden">
+    <h2>Login</h2>
+    <form id="login-form">
+      <input type="email" id="email" placeholder="Email" required />
+      <input type="password" id="password" placeholder="Password" required />
+      <button type="submit">Login</button>
+    </form>
+  </div>
+
+  <div id="dashboard-container" class="hidden">
+    <div class="sidebar">
+      <button class="dashboard-btn" data-link="link1">Attendance</button>
+      <button class="dashboard-btn" data-link="link2">Assessment</button>
+      <button class="dashboard-btn" data-link="link3">Administration</button>
+    </div>
+    <div class="main-content">
+      <iframe id="dashboard-frame" src="" frameborder="0"></iframe>
+    </div>
+    <button id="logout-btn">Logout</button>
+  </div>
+</body>
+</html>
