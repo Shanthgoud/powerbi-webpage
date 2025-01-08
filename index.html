@@ -8,7 +8,8 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div id="login-container" class="hidden">
+  <!-- Login Page -->
+  <div id="login-container" class="container">
     <h2>Login</h2>
     <form id="login-form">
       <input type="email" id="email" placeholder="Email" required />
@@ -17,16 +18,23 @@
     </form>
   </div>
 
-  <div id="dashboard-container" class="hidden">
+  <!-- Main Page -->
+  <div id="dashboard-container" class="container hidden">
     <div class="sidebar">
-      <button class="dashboard-btn" data-link="link1">Attendance</button>
-      <button class="dashboard-btn" data-link="link2">Assessment</button>
-      <button class="dashboard-btn" data-link="link3">Administration</button>
+      <button class="menu-btn" data-module="attendance">Attendance</button>
+      <div id="attendance-submenu" class="submenu hidden">
+        <button class="submenu-btn" data-link="attendance-live">Live Dashboard</button>
+        <button class="submenu-btn" data-link="attendance-trend">Trend Dashboard</button>
+      </div>
+      <button class="menu-btn" data-module="assessment">Assessment</button>
+      <button class="menu-btn" data-module="accreditation">Accreditation</button>
     </div>
+
     <div class="main-content">
-      <h1 id="dashboard-title"></h1>
+      <h1 id="dashboard-title">Select a Dashboard</h1>
       <iframe id="dashboard-frame" src="" frameborder="0" class="hidden"></iframe>
     </div>
+
     <button id="logout-btn" class="logout-btn">Logout</button>
   </div>
 </body>

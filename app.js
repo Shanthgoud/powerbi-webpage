@@ -10,15 +10,15 @@ const loginContainer = document.getElementById("login-container");
 const dashboardContainer = document.getElementById("dashboard-container");
 const loginForm = document.getElementById("login-form");
 const logoutBtn = document.getElementById("logout-btn");
-const dashboardButtons = document.querySelectorAll(".dashboard-btn");
+const menuButtons = document.querySelectorAll(".menu-btn");
+const submenuButtons = document.querySelectorAll(".submenu-btn");
 const dashboardFrame = document.getElementById("dashboard-frame");
 const dashboardTitle = document.getElementById("dashboard-title");
 
-// Dashboard links
+// Dashboard Links
 const DASHBOARD_LINKS = {
-  link1: { title: "Attendance Dashboard", url: "https://app.powerbi.com/view?r=eyJrIjoiZjM0NTBjOWEtZDBlZC00YWQwLTkxMGQtYjI2MTQ2NjUyY2E4IiwidCI6IjljNjhhODZhLTdjMjAtNDhiNC1iMzUyLTExN2RlOTU4MjYzYSJ9" },
-  link2: { title: "Assessment Dashboard", url: "https://app.powerbi.com/view?r=eyJrIjoiZmQxMDk0ZDEtMzQyOS00ZTAxLWEyMmYtMjIxZmI1ZDdhNDU4IiwidCI6IjljNjhhODZhLTdjMjAtNDhiNC1iMzUyLTExN2RlOTU4MjYzYSJ9" },
-  link3: { title: "Administration Dashboard", url: "https://app.powerbi.com/view?r=eyJrIjoiOTFiNWMzZjYtNTkxZC00ODg1LWFjN2QtZTc2MzkxZGM5OThkIiwidCI6IjdiNmE1ZGZhLTNjNWEtNDQxYS04MDI5LTlhMjIyY2QyNzQ5OCJ9" },
+  "attendance-live": { title: "Attendance - Live Dashboard", url: "https://app.powerbi.com/view?r=eyJrIjoiNGRhNjY0OGMtN2JkMy00NDlkLTk2NWQtN2UxMjg0MjU5NTYyIiwidCI6IjA1ZDdjZWIyLTQwOTItNDliOS05NWFmLWE1OWRiNmExY2Y4ZCJ9" },
+  "attendance-trend": { title: "Attendance - Trend Dashboard", url: "https://app.powerbi.com/view?r=eyJrIjoiNjQ4ZThmZDYtZTA4ZC00ZTZjLWI0MTAtNzRjOTFlNjYyNDc4IiwidCI6IjA1ZDdjZWIyLTQwOTItNDliOS05NWFmLWE1OWRiNmExY2Y4ZCJ9" },
 };
 
 // Show/Hide Containers
@@ -62,9 +62,34 @@ logoutBtn.addEventListener("click", async () => {
   toggleContainers(true);
 });
 
-// Handle Dashboard Buttons
-dashboardButtons.forEach((button) => {
+// Handle Menu Buttons
+menuButtons.forEach((button) => {
   button.addEventListener("click", () => {
+    // Highlight Active Menu Button
+    menuButtons.forEach((btn) => btn.classList.remove("active"));
+    button.classList.add("active");
+
+    // Toggle Submenu Visibility
+    const module = button.getAttribute("data-module");
+    document.querySelectorAll(".submenu").forEach((submenu) => submenu.classList.add("hidden"));
+    const submenu = document.getElementById(`${module}-submenu`);
+    if (submenu) submenu.classList.remove("hidden");
+
+    // Clear Main Content
+    dashboardFrame.src = "";
+    dashboardFrame.classList.add("hidden");
+    dashboardTitle.textContent = "Select a Dashboard";
+  });
+});
+
+// Handle Submenu Buttons
+submenuButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    // Highlight Active Submenu Button
+    submenuButtons.forEach((btn) => btn.classList.remove("active"));
+    button.classList.add("active");
+
+    // Load Dashboard
     const link = button.getAttribute("data-link");
     const { title, url } = DASHBOARD_LINKS[link];
     dashboardTitle.textContent = title;
