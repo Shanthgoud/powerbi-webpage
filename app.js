@@ -12,12 +12,13 @@ const loginForm = document.getElementById("login-form");
 const logoutBtn = document.getElementById("logout-btn");
 const dashboardButtons = document.querySelectorAll(".dashboard-btn");
 const dashboardFrame = document.getElementById("dashboard-frame");
+const dashboardTitle = document.getElementById("dashboard-title");
 
 // Dashboard links
 const DASHBOARD_LINKS = {
-  link1: "https://app.powerbi.com/view?r=eyJrIjoiZjM0NTBjOWEtZDBlZC00YWQwLTkxMGQtYjI2MTQ2NjUyY2E4IiwidCI6IjljNjhhODZhLTdjMjAtNDhiNC1iMzUyLTExN2RlOTU4MjYzYSJ9",
-  link2: "https://app.powerbi.com/view?r=eyJrIjoiZmQxMDk0ZDEtMzQyOS00ZTAxLWEyMmYtMjIxZmI1ZDdhNDU4IiwidCI6IjljNjhhODZhLTdjMjAtNDhiNC1iMzUyLTExN2RlOTU4MjYzYSJ9",
-  link3: "https://app.powerbi.com/view?r=eyJrIjoiOTFiNWMzZjYtNTkxZC00ODg1LWFjN2QtZTc2MzkxZGM5OThkIiwidCI6IjdiNmE1ZGZhLTNjNWEtNDQxYS04MDI5LTlhMjIyY2QyNzQ5OCJ9",
+  link1: { title: "Attendance Dashboard", url: "https://app.powerbi.com/view?r=eyJrIjoiZjM0NTBjOWEtZDBlZC00YWQwLTkxMGQtYjI2MTQ2NjUyY2E4IiwidCI6IjljNjhhODZhLTdjMjAtNDhiNC1iMzUyLTExN2RlOTU4MjYzYSJ9" },
+  link2: { title: "Assessment Dashboard", url: "https://app.powerbi.com/view?r=eyJrIjoiZmQxMDk0ZDEtMzQyOS00ZTAxLWEyMmYtMjIxZmI1ZDdhNDU4IiwidCI6IjljNjhhODZhLTdjMjAtNDhiNC1iMzUyLTExN2RlOTU4MjYzYSJ9" },
+  link3: { title: "Administration Dashboard", url: "https://app.powerbi.com/view?r=eyJrIjoiOTFiNWMzZjYtNTkxZC00ODg1LWFjN2QtZTc2MzkxZGM5OThkIiwidCI6IjdiNmE1ZGZhLTNjNWEtNDQxYS04MDI5LTlhMjIyY2QyNzQ5OCJ9" },
 };
 
 // Show/Hide Containers
@@ -65,7 +66,10 @@ logoutBtn.addEventListener("click", async () => {
 dashboardButtons.forEach((button) => {
   button.addEventListener("click", () => {
     const link = button.getAttribute("data-link");
-    dashboardFrame.src = DASHBOARD_LINKS[link];
+    const { title, url } = DASHBOARD_LINKS[link];
+    dashboardTitle.textContent = title;
+    dashboardFrame.src = url;
+    dashboardFrame.classList.remove("hidden");
   });
 });
 
